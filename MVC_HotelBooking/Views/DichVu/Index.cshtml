@@ -1,36 +1,34 @@
 ﻿@model IEnumerable<MVC_HotelBooking.Models.DichVu>
 
 @{
-    ViewData["Title"] = "Danh sách dịch vụ";
+    ViewData["Title"] = "Danh Sách Dịch Vụ";
 }
 
-<h2>Danh sách dịch vụ</h2>
-<p>
-    <a href="@Url.Action("Create")" class="btn btn-primary">➕ Thêm dịch vụ</a>
-</p>
+<h1>@ViewData["Title"]</h1>
 
-<table class="table table-bordered table-striped">
+<table class="table">
     <thead>
         <tr>
-            <th>Mã DV</th>
-            <th>Kiểu dịch vụ</th>
+            <th>Kiểu Dịch Vụ</th>
             <th>Giá</th>
-            <th>Hành động</th>
+            <th>Ảnh</th>
+            <th>Thao Tác</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var dichVu in Model)
         {
             <tr>
-                <td>@item.MaDV</td>
-                <td>@item.KieuDichVu</td>
-                <td>@item.Gia.ToString("N0") VNĐ</td>
+                <td>@dichVu.KieuDichVu</td>
+                <td>@dichVu.Gia</td>
+                <td><img src="@dichVu.ImageUrl" alt="Image" width="100" /></td>
                 <td>
-                    <a class="btn btn-info btn-sm" href="@Url.Action("Details", new { id = item.MaDV })">🔍 Chi tiết</a>
-                    <a class="btn btn-warning btn-sm" href="@Url.Action("Edit", new { id = item.MaDV })">✏️ Sửa</a>
-                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", new { id = item.MaDV })">🗑️ Xóa</a>
+                    <a href="@Url.Action("Edit", "DichVu", new { id = dichVu.MaDV })" class="btn btn-warning">Chỉnh sửa</a>
+                    <a href="@Url.Action("Delete", "DichVu", new { id = dichVu.MaDV })" class="btn btn-danger">Xóa</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<a href="@Url.Action("Create", "DichVu")" class="btn btn-success">Tạo Dịch Vụ Mới</a>
