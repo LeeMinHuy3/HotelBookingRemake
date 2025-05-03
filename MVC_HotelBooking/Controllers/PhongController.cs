@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
+using Refit;
+using System.Text.Json;
 
 namespace MVC_HotelBooking.Controllers
 {
@@ -66,6 +68,7 @@ namespace MVC_HotelBooking.Controllers
 
             return loaiPhongDropdown;
         }
+            
 
         public async Task<IActionResult> Index()
         {
