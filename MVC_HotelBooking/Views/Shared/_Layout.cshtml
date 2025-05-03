@@ -125,10 +125,10 @@
                                     <a class="nav-link" asp-controller="Contact" asp-action="Index">Liên hệ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link  asp-controller="DatPhong" asp-action="Cart" >
-                                       
-                                        
-                                       Giỏ hàng
+                                    <a class="nav-link"  asp-controller="DatPhong" asp-action="Cart" >
+
+
+                                        🛒
                                     </a>
                                 </li>
                                 @if (Accessor.HttpContext.Session.GetString("Email") != null)
@@ -170,7 +170,7 @@
         </div>
     </header>
 
-    <main class="flex-fill" style="padding-top:185px">
+    <main class="flex-fill" style="padding-top:185px; min-height:100vh;">
         <section>
             @RenderBody()
             @RenderSection("Scripts", required: false)

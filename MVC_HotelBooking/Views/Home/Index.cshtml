@@ -59,46 +59,12 @@
 <div class="container my-4">
     <div class="row">
         <!-- Form lọc - chiếm 3 cột -->
-        <div class="col-md-3">
-            <h5 class="mb-3">🔍 Tìm kiếm / Lọc</h5>
-            <form method="get" asp-controller="Home" asp-action="Index" class="border p-3 rounded shadow-sm bg-light">
-                <div class="mb-3">
-                    <label class="form-label">Loại phòng</label>
-                    <select name="loaiPhong" class="form-select">
-                        <option value="">-- Tất cả --</option>
-                        <option value="8">Phòng Đơn</option>
-                        <option value="5">Phòng Đôi</option>
-                        <option value="6">Phòng Gia Đình</option>
-                        <option value="7">Phòng Vip</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Giá từ</label>
-                    <input type="number" name="min" class="form-control" placeholder="Ví dụ: 100000" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Đến</label>
-                    <input type="number" name="max" class="form-control" placeholder="Ví dụ: 500000" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Trạng thái</label>
-                    <select name="status" class="form-select">
-                        <option value="">-- Tất cả --</option>
-                        <option value="Còn trống">Trống</option>
-                        <option value="Đã đặt">Đã đặt</option>
-                        <option value="Đang chờ thanh toán">Đang chờ thanh toán</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-warning w-100">Tìm kiếm</button>
-            </form>
-        </div>
+       
+            
+        
 
         <!-- Danh sách phòng - chiếm 9 cột -->
-        <div class="col-md-9">
+        <div class="col-md">
             <h3 class="mb-4 text-center">Phòng</h3>
             <div class="row">
                 @if (Model.Rooms != null && Model.Rooms.Any())
