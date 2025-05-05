@@ -69,7 +69,7 @@ namespace MVC_HotelBooking.Controllers
 
                     if (response.IsSuccessStatusCode)
                     {
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction("Index", "DichVu");
                     }
 
                     var errorContent = await response.Content.ReadAsStringAsync();
@@ -100,19 +100,47 @@ namespace MVC_HotelBooking.Controllers
                 return View(model);
 
             using var client = new HttpClient { BaseAddress = new Uri(BaseUrl) };
-            var response = await client.PutAsJsonAsync($"{Endpoint}/{model.MaDDV}", model);
-            if (!response.IsSuccessStatusCode)
-                ModelState.AddModelError("", "Cập nhật thất bại");
 
-            return RedirectToAction(nameof(Index));
+            // Lấy lại thông tin dịch vụ để tính tổng tiền chính xác
+            var service = await client.GetFromJsonAsync<DichVu>($"DichVu/{model.MaDV}");
+            if (service != null)
+            {
+                model.TongTien = model.SoLuong * service.Gia;
+
+                var response = await client.PutAsJsonAsync($"{Endpoint}/{model.MaDDV}", model);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index"); // hoặc "DatDichVu" nếu bạn muốn quay về danh sách đặt dịch vụ
+                }
+                else
+                {
+                    var error = await response.Content.ReadAsStringAsync();
+                    ModelState.AddModelError("", $"Lỗi cập nhật từ API: {error}");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Không tìm thấy dịch vụ để tính giá.");
+            }
+
+            return View(model);
         }
 
         // Xóa thông tin đặt dịch vụ
         public async Task<IActionResult> Delete(int id)
         {
             using var client = new HttpClient { BaseAddress = new Uri(BaseUrl) };
+            var item = await client.GetFromJsonAsync<DatDichVu>($"{Endpoint}/{id}");
+            if (item == null) return NotFound();
+            return View(item);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            using var client = new HttpClient { BaseAddress = new Uri(BaseUrl) };
             await client.DeleteAsync($"{Endpoint}/{id}");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
     }
 }

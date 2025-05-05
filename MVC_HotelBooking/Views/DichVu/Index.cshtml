@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Danh Sách Dịch Vụ";
 }
+@inject IHttpContextAccessor Accessor
 
 
 <div class="container py-4">
@@ -25,7 +26,10 @@
                     <div class="card-body">
                         <h5 class="card-title">@dv.KieuDichVu</h5>
                         <p class="card-text text-success fw-semibold">@dv.Gia.ToString("N0") đ</p>
-                        <a href="@Url.Action("Create", "DatDichVu", new { maDV = dv.MaDV })" class="btn btn-primary">Đặt dịch vụ</a>
+                        @if (Accessor.HttpContext.Session.GetString("Email") != null)
+                        {
+                            <a href="@Url.Action("Create", "DatDichVu", new { maDV = dv.MaDV })" class="btn btn-primary">Đặt dịch vụ</a>
+                        }
                     </div>
                 </div>
             </div>

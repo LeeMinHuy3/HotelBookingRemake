@@ -117,6 +117,9 @@
                                 </li>
                                 @if (Accessor.HttpContext.Session.GetString("Email") != null)
                                 {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="DatDichVu" asp-action="Index">DV Đã Đặt</a>
+                                    </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle">Xin chào, @Accessor.HttpContext.Session.GetString("UserName")</a>
                                         <ul class="dropdown-menu">
