@@ -16,8 +16,14 @@ namespace MVC_HotelBooking.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var dichVus = await _httpClient.GetFromJsonAsync<List<DichVu>>("https://localhost:7077/api/DichVu");
-            return View(dichVus);
+            var dichVus = await _httpClient
+                .GetFromJsonAsync<List<DichVu>>("https://localhost:7077/api/DichVu")
+                ?? new List<DichVu>();
+
+            if (User.IsInRole("Admin"))
+                return View("IndexAdmin", dichVus);
+
+            return View("Index", dichVus);
         }
 
         public IActionResult Create()

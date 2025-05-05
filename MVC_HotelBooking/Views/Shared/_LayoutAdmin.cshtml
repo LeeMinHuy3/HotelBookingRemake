@@ -79,6 +79,7 @@
                 <li class="nav-item mb-2"><a href="@Url.Action("Index", "LoaiPhong")">🏨 Quản lý loại phòng</a></li>
                 <li class="nav-item mb-2"><a href="#" onclick="showSection('customer-management')">👥 Quản lý khách hàng</a></li>
                 <li class="nav-item mb-2"><a href="@Url.Action("Index", "DichVu")">👥 Quản lý dịch vụ</a></li>
+                <li class="nav-item mb-2"><a href="@Url.Action("Index", "DatDichVu")">👥 Đặt dịch vụ</a></li>
                 <li class="nav-item mb-2"><a href="#" onclick="showSection('system-settings')">⚙ Thiết lập hệ thống</a></li>
             </ul>
         </aside>
@@ -111,6 +112,7 @@
             </section>
             <div>
                 @RenderBody()
+                @RenderSection("Scripts", required: false)
             </div>
             <!-- Booking Management Section -->
             <section id="booking-management" class="content-section">

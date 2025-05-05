@@ -3,6 +3,7 @@ using API_HotelBooking.Models;
 using API_HotelBooking.Service;
 using API_HotelBooking.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +11,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 builder.Services.AddControllers()
-	.AddJsonOptions(options =>
-	{
-		options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-	});
+    .AddJsonOptions(opts =>
+    {
+        opts.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        opts.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
 
+builder.Services.AddScoped<IDatDichVuService, DatDichVuService>();
 builder.Services.AddScoped<IDichVuService, DichVuService>();
 builder.Services.AddScoped<IPhongService, PhongService>();
 builder.Services.AddScoped<ILoaiPhongService, LoaiPhongService>();
