@@ -1,0 +1,43 @@
+﻿@model List<MVC_HotelBooking.Models.DatPhong>
+
+@{
+    ViewData["Title"] = "Danh sách đặt phòng";
+    Layout = "_Layout_Admin";
+}
+
+<h2>Danh sách đặt phòng</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã ĐP</th>
+            <th>Tên người dùng</th>
+            <th>Phòng</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Số người</th>
+            <th>Trạng thái</th>
+            <th>Tổng tiền</th>
+            <th>Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaDP</td>
+                <td>@item.MaND</td>
+                <td>@item.MaP</td>
+                <td>@item.ThoiGianCheckIn.ToString("dd/MM/yyyy")</td>
+                <td>@item.ThoiGianCheckOut.ToString("dd/MM/yyyy")</td>
+                <td>@item.SoNguoi</td>
+                <td>@item.TrangThai</td>
+                <td>@item.TongTien.ToString("N0") VND</td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-controller="DatPhong" asp-route-id="@item.MaDP" class="btn btn-sm btn-primary">Sửa</a>
+                  
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

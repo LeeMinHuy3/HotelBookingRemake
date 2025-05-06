@@ -115,7 +115,9 @@ namespace MVC_HotelBooking.Controllers
 		// Đăng xuất người dùng
 		public IActionResult Logout()
 		{
-			HttpContext.Session.Clear();  // Xóa session
+			HttpContext.Session.Remove("Id");  // Xóa session
+			HttpContext.Session.Remove("Email");  // Xóa session
+			HttpContext.Session.Remove("Username");  // Xóa session
 			return RedirectToAction("Index", "Home");  // Quay lại trang chủ
 		}
 	}

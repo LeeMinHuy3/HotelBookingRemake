@@ -1,0 +1,72 @@
+﻿@model MVC_HotelBooking.ViewModel.DatPhongViewModel
+
+@{
+    ViewData["Title"] = "Cập nhật đặt phòng";
+    Layout = "_Layout_Admin";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow rounded-4 border-0">
+                <div class="card-header bg-primary text-white rounded-top-4">
+                    <h4 class="mb-0">Cập nhật đặt phòng</h4>
+                </div>
+                <div class="card-body p-4">
+
+                    @if (ViewData.ModelState.ErrorCount > 0)
+                    {
+                            <div class="alert alert-danger">
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                            {
+                                        <div>@error.ErrorMessage</div>
+                            }
+                            </div>
+                    }
+
+                    <form asp-action="Edit" method="post">
+                    
+                        <input type="hidden" asp-for="MaDP" />
+                        <input type="hidden" asp-for="MaND" />
+                        <input type="hidden" asp-for="MaP" />
+
+                        <div class="mb-3">
+                            <label asp-for="ThoiGianCheckIn" class="form-label fw-bold"></label>
+                            <input asp-for="ThoiGianCheckIn" class="form-control" type="date" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ThoiGianCheckOut" class="form-label fw-bold"></label>
+                            <input asp-for="ThoiGianCheckOut" class="form-control" type="date" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SoNguoi" class="form-label fw-bold"></label>
+                            <input asp-for="SoNguoi" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="MaKM" class="form-label fw-bold">Mã khuyến mãi (nếu có)</label>
+                            <input asp-for="MaKM" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="TrangThai" class="form-label fw-bold"></label>
+                            <select asp-for="TrangThai" class="form-select">
+                                <option value="Đang chờ thanh toán">Đang chờ thanh toán</option>
+                                <option value="Đã thanh toán">Đã thanh toán</option>
+                                <option value="Đã hủy">Đã hủy</option>
+                            </select>
+                        </div>
+
+                        <div class="text-end">
+                            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+                            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
